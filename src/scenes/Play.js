@@ -6,26 +6,26 @@ class Play extends Phaser.Scene {
     preload() {
         this.load.image('rocket', './assets/rocket.png');
         this.load.image('spaceship', './assets/spaceship.png');
-        //this.load.image('starfield', './assets/starfield.png');
         this.load.image('sky', './assets/sky.png');
         this.load.image('mountains', './assets/mountains.png');
         this.load.image('mountains2', './assets/mountains2.png');
         this.load.image('clouds', './assets/clouds.png');
+        this.load.image('scoreborder', './assets/score_border.png');
+        this.load.image('gameborder', './assets/game_border.png');
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
     }
 
     create() {
-        //this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
         this.sky = this.add.tileSprite(0, 0, 640, 480, 'sky').setOrigin(0, 0);
         this.mountains2 = this.add.tileSprite(0, 0, 640, 480, 'mountains2').setOrigin(0, 0);
         this.mountains = this.add.tileSprite(0, 0, 640, 480, 'mountains').setOrigin(0, 0);
         this.clouds = this.add.tileSprite(0, 0, 640, 480, 'clouds').setOrigin(0, 0);
 
-        this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
-        this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
+        this.scoreborder = this.add.tileSprite(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 'scoreborder').setOrigin(0, 0);
+        this.gameborder = this.add.tileSprite(0, 0, game.config.width, borderUISize, 'gameborder').setOrigin(0, 0);
+        this.gameborder = this.add.tileSprite(0, game.config.height - borderUISize, game.config.width, borderUISize, 'gameborder').setOrigin(0, 0);
+        this.gameborder = this.add.tileSprite(0, 0, borderUISize, game.config.height, 'gameborder').setOrigin(0, 0);
+        this.gameborder = this.add.tileSprite(game.config.width - borderUISize, 0, borderUISize, game.config.height, 'gameborder').setOrigin(0, 0);
 
         this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
         
@@ -48,8 +48,8 @@ class Play extends Phaser.Scene {
         let scoreConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
+            backgroundColor: '#aaade6',
+            color: '#4f60bd',
             align: 'right',
             padding: {
               top: 5,
