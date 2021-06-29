@@ -4,8 +4,8 @@ class Play extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('rocket', './assets/rocket.png');
-        this.load.image('spaceship', './assets/spaceship.png');
+        this.load.image('star', './assets/star.png');
+        this.load.image('sheep', './assets/sheep.png');
         this.load.image('sky', './assets/sky.png');
         this.load.image('mountains', './assets/mountains.png');
         this.load.image('mountains2', './assets/mountains2.png');
@@ -27,11 +27,11 @@ class Play extends Phaser.Scene {
         this.gameborder = this.add.tileSprite(0, 0, borderUISize, game.config.height, 'gameborder').setOrigin(0, 0);
         this.gameborder = this.add.tileSprite(game.config.width - borderUISize, 0, borderUISize, game.config.height, 'gameborder').setOrigin(0, 0);
 
-        this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
+        this.p1Star = new Star(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'star').setOrigin(0.5, 0);
         
-        this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'spaceship', 0, 30).setOrigin(0, 0);
-        this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'spaceship', 0, 20).setOrigin(0,0);
-        this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4, 'spaceship', 0, 10).setOrigin(0,0);
+        this.sheep01 = new Sheep(this, game.config.width + borderUISize*6, borderUISize*4, 'sheep', 0, 30).setOrigin(0, 0);
+        this.sheep02 = new Sheep(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'sheep', 0, 20).setOrigin(0,0);
+        this.sheep03 = new Sheep(this, game.config.width, borderUISize*6 + borderPadding*4, 'sheep', 0, 10).setOrigin(0,0);
 
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
@@ -84,46 +84,46 @@ class Play extends Phaser.Scene {
         this.clouds.tilePositionX -= 1;
 
         if(!this.gameOver) {
-            this.p1Rocket.update();
-            this.ship01.update();
-            this.ship02.update();
-            this.ship03.update();
+            this.p1Star.update();
+            this.sheep01.update();
+            this.sheep02.update();
+            this.sheep03.update();
         }
-        if(this.checkCollision(this.p1Rocket, this.ship03)) {
-            this.p1Rocket.reset();
-            this.shipExplode(this.ship03);
+        if(this.checkCollision(this.p1Star, this.sheep03)) {
+            this.p1Star.reset();
+            this.sheepExplode(this.sheep03);
           }
-          if (this.checkCollision(this.p1Rocket, this.ship02)) {
-            this.p1Rocket.reset();
-            this.shipExplode(this.ship02);
+          if (this.checkCollision(this.p1Star, this.sheep02)) {
+            this.p1Star.reset();
+            this.sheepExplode(this.sheep02);
           }
-          if (this.checkCollision(this.p1Rocket, this.ship01)) {
-            this.p1Rocket.reset();
-            this.shipExplode(this.ship01);
+          if (this.checkCollision(this.p1Star, this.sheep01)) {
+            this.p1Star.reset();
+            this.sheepExplode(this.sheep01);
           }
     }
 
-    checkCollision(rocket, ship) {
-        if(rocket.x < ship.x + ship.width &&
-            rocket.x + rocket.width > ship.x &&
-            rocket.y < ship.y + ship.height &&
-            rocket.height + rocket.y > ship.y) {
+    checkCollision(star, sheep) {
+        if(star.x < sheep.x + sheep.width &&
+            star.x + star.width > sheep.x &&
+            star.y < sheep.y + sheep.height &&
+            star.height + star.y > sheep.y) {
                 return true;
             } else {
                 return false;
             }
     }
 
-    shipExplode(ship) {
-        ship.alpha = 0;
-        let boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0, 0);
+    sheepExplode(sheep) {
+        sheep.alpha = 0;
+        let boom = this.add.sprite(sheep.x, sheep.y, 'explosion').setOrigin(0, 0);
         boom.anims.play('explode');             
         boom.on('animationcomplete', () => {    
-          ship.reset();                        
-          ship.alpha = 1;                       
+          sheep.reset();                        
+          sheep.alpha = 1;                       
           boom.destroy();                       
         });   
-        this.p1Score += ship.points;
+        this.p1Score += sheep.points;
         this.scoreLeft.text = this.p1Score;
         this.sound.play('sfx_explosion');
       }

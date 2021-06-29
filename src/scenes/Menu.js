@@ -6,7 +6,7 @@ class Menu extends Phaser.Scene {
     preload(){
         this.load.audio('sfx_select', './assets/blip_select.wav');
         this.load.audio('sfx_explosion', './assets/explosion.wav');
-        this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
+        //this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
         this.load.image('title', './assets/title_screen.png');
     }
 
@@ -20,7 +20,7 @@ class Menu extends Phaser.Scene {
     update() {
         if(Phaser.Input.Keyboard.JustDown(keyLEFT)) {
             game.settings = {
-                spaceshipSpeed: 3,
+                sheepSpeed: 3,
                 gameTimer: 60000
             }
             this.sound.play('sfx_select');
@@ -28,7 +28,7 @@ class Menu extends Phaser.Scene {
         }
         if(Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
             game.settings = {
-                spaceshipSpeed: 4,
+                sheepSpeed: 4,
                 gameTimer: 45000
             }
             this.sound.play('sfx_select');
