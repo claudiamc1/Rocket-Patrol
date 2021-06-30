@@ -5,7 +5,7 @@ class Star extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);
         this.isFiring = false;
         this.moveSpeed = 2;
-        //this.sfxRocket = scene.sound.add('sfx_rocket');
+        this.sfxStar = scene.sound.add('sfx_star');
     }
 
     update() {
@@ -18,7 +18,7 @@ class Star extends Phaser.GameObjects.Sprite {
         }
         if(Phaser.Input.Keyboard.JustDown(keyF)) {
             this.isFiring = true;
-            //this.sfxRocket.play();
+            this.sfxStar.play();
         }
         if(this.isFiring && this.y >= borderUISize * 3 + borderPadding) {
             this.y -= this.moveSpeed;

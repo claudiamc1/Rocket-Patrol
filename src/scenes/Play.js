@@ -125,6 +125,7 @@ class Play extends Phaser.Scene {
         });   
         this.p1Score += sheep.points;
         this.scoreLeft.text = this.p1Score;
-        this.sound.play('sfx_explosion');
+
+        this.sound.play(Phaser.Math.RND.pick(['sfx_explosion1', 'sfx_explosion2', 'sfx_explosion3', 'sfx_explosion4']));
       }
 }
